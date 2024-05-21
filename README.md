@@ -33,7 +33,7 @@ what this tool allows is for you to be in `~/Documents/personal/cool_project` an
 
 To start the installation script just run the following command as root (for bin access)
 ```
-bash <(curl -s https://github.com/meir/cdl/install.sh)
+sudo bash <(curl -s https://github.com/meir/cdl/install.sh)
 ```
 
 ## How to use
@@ -46,5 +46,3 @@ cds     | cds (name)  | save directory path on `last` or (name)
 cdls    | cdls        | list all saved name + directory paths
 cdr     | cdr (name)  | remove directory path from cache by `last` or (name)
 cdp     | cdp (name)  | print directory path saved in `last` or (name)
-
-
