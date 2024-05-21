@@ -38,12 +38,12 @@ uninstall() {
 }
 
 get_profile() {
-	if [ -f ~/.bashrc ]; then
+	if [ -f ~/.zshrc ]; then
+		echo ~/.zshrc
+	elif [ -f ~/.bashrc ]; then
 		echo ~/.bashrc
 	elif [ -f ~/.bash_profile ]; then
 		echo ~/.bash_profile
-	elif [ -f ~/.zshrc ]; then
-		echo ~/.zshrc
 	elif [ -f ~/.profile ]; then
 		echo ~/.profile
 	else
@@ -64,17 +64,19 @@ uninstall)
 	curr=$(pwd)
 	cd $temp_dir
 
-	git clone https://github.com/meir/cdl.git .
+	git clone https://github.com/meir/cdl2.git .
 	build
 	install
 
 	profile=$(get_profile)
-	if [ -n "$profile" ]; then
+	read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		cat ./aliases >>$profile
 	fi
 
 	cd $curr
 	remove_temp_dir
 	unset curr
+	unset profile
 	;;
 esac
