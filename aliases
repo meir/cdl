@@ -1,4 +1,4 @@
 
-# cdl alias. src: https://github.com/meir/cdl
-alias cdl="cd $(cdp $@)"
+# alias cdl. src: https://github.com/meir/cdl
+alias cdl="cd $(cdp $1)"
 

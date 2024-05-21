@@ -27,7 +27,7 @@ install() {
 			echo "Installing $cmd..."
 			cp bin/$cmd /usr/local/bin
 		done
-		echo 1
+		export installed=1
 	fi
 }
 
@@ -71,14 +71,27 @@ uninstall)
 
 	git clone https://github.com/meir/cdl2.git .
 	build
-	installed=$(install)
+	install
 
 	if [[ $installed == 1 ]]; then
 		profile=$(get_profile)
-		read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
-		printf "\n"
-		if [[ $REPLY =~ ^[Yy]$ ]]; then
-			cat ./aliases >>$profile
+		exists=$(cat $profile | grep -c "cdls" | wc -l)
+		if [[ $exists == 0 ]]; then
+			read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
+			printf "\n"
+			if [[ $REPLY =~ ^[Yy]$ ]]; then
+				cat ./aliases >>$profile
+			fi
+		else
+			read -p ""$profile" already contains aliases. Do you want to overwrite them? [y/N] " -n 1 -r
+			printf "\n"
+			if [[ $REPLY =~ ^[Yy]$ ]]; then
+				# remove old alias without sed since sed works different between linux and darwin
+				cp $profile ./profile
+				grep -v "alias cdl" ./profile >$profile
+				mv ./profile $profile
+				cat ./aliases >>$profile
+			fi
 		fi
 	else
 		printf "Cancelling installation...\n"
@@ -88,5 +101,6 @@ uninstall)
 	remove_temp_dir
 	unset curr
 	unset profile
+	unset installed
 	;;
 esac
