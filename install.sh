@@ -2,6 +2,7 @@ cmds="cdls cdp cdr cds"
 
 create_temp_dir() {
 	temp_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'temp_dir')
+	printf "Created temp dir: $temp_dir\n"
 }
 
 remove_temp_dir() {
@@ -25,6 +26,8 @@ install() {
 			cp bin/$cmd /usr/local/bin
 		done
 	fi
+
+	echo 1
 }
 
 uninstall() {
@@ -66,12 +69,16 @@ uninstall)
 
 	git clone https://github.com/meir/cdl2.git .
 	build
-	install
+	installed=$(install)
 
-	profile=$(get_profile)
-	read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		cat ./aliases >>$profile
+	if [ $installed -eq 1 ]; then
+		profile=$(get_profile)
+		read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			cat ./aliases >>$profile
+		fi
+	else
+		printf "Cancelling installation...\n"
 	fi
 
 	cd $curr
