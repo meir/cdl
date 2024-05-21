@@ -6,7 +6,7 @@ I just wanted to make this a bit more stable and easier to install and thus conv
 ## What is this?
 
 It is a very simple command to just save directory paths and quickly switch between them.
-I use this very oftend since i got bothered by constantly typing `cd ../../../../folder` and such.
+I use this very often since i got bothered by constantly typing `cd ../../../../folder` and such.
 For example, you have the following folder structure:
 ```
 ~/Documents
