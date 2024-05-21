@@ -7,7 +7,7 @@ _cdl() {
     '1: :->path'\
 
   case $state in
-    (path) _arguments "1:profiles:($(cat ~/.cdlst | sed 's/|/ /' | awk '{print $1}'))" ;;
+    (path) _arguments "1:profiles:($(cdls | sed 's/|/ /' | awk '{print $1}'))" ;;
   esac
 }
 
