@@ -80,7 +80,7 @@ uninstall)
 	curr=$(pwd)
 	cd $temp_dir
 
-	git clone https://github.com/meir/cdl2.git .
+	git clone https://github.com/meir/cdl.git .
 	build
 	install
 
