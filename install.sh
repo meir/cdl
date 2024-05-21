@@ -57,6 +57,17 @@ get_profile() {
 	fi
 }
 
+add_completion() {
+	is_omz=$(command -v omz)
+	if [[ -n "$is_omz" ]]; then
+		read -p "Do you want to add completion to your shell? [y/N] " -n 1 -r
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			mkdir -p ~/.oh-my-zsh/completions
+			cp ./_cdl ~/.oh-my-zsh/completions/
+		fi
+	fi
+}
+
 case $1 in
 build)
 	build
@@ -81,6 +92,7 @@ uninstall)
 			printf "\n"
 			if [[ $REPLY =~ ^[Yy]$ ]]; then
 				cat ./aliases >>$profile
+				add_completion
 			fi
 		else
 			read -p ""$profile" already contains aliases. Do you want to overwrite them? [y/N] " -n 1 -r
@@ -88,9 +100,10 @@ uninstall)
 			if [[ $REPLY =~ ^[Yy]$ ]]; then
 				# remove old alias without sed since sed works different between linux and darwin
 				cp $profile ./profile
-				grep -v "alias cdl" ./profile >$profile
+				grep -v -e "alias cdl" -e "cdl()" $profile >./profile
 				mv ./profile $profile
 				cat ./aliases >>$profile
+				add_completion
 			fi
 		fi
 	else

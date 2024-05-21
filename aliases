@@ -1,4 +1,4 @@
 
 # alias cdl. src: https://github.com/meir/cdl
-alias cdl="cd $(cdp $1)"
+cdl() { cd $(cdp $1); }
 

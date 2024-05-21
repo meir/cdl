@@ -1,0 +1,14 @@
+#compdef cdl
+
+_cdl() {
+  local state
+
+  _arguments \
+    '1: :->path'\
+
+  case $state in
+    (path) _arguments "1:profiles:($(cat ~/.cdlst | sed 's/|/ /' | awk '{print $1}'))" ;;
+  esac
+}
+
+_cdl "$@"
