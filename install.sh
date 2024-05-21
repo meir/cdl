@@ -19,19 +19,21 @@ build() {
 
 install() {
 	read -p "Do you want to install the commands globally? (/usr/local/bin) [y/N] " -n 1 -r
+	printf "\n"
+
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		mkdir -p /usr/local/bin
 		for cmd in $(ls bin/); do
 			echo "Installing $cmd..."
 			cp bin/$cmd /usr/local/bin
 		done
+		echo 1
 	fi
-
-	echo 1
 }
 
 uninstall() {
 	read -p "Are you sure you want to delete the following commands from your system? $cmds [y/N] " -n 1 -r
+	printf "\n"
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		for cmd in $cmds; do
 			echo "Uninstalling $cmd..."
@@ -71,9 +73,10 @@ uninstall)
 	build
 	installed=$(install)
 
-	if [ $installed -eq 1 ]; then
+	if [[ $installed == 1 ]]; then
 		profile=$(get_profile)
 		read -p "Do you want to add the aliases to your shell profile? ($profile) [y/N] " -n 1 -r
+		printf "\n"
 		if [[ $REPLY =~ ^[Yy]$ ]]; then
 			cat ./aliases >>$profile
 		fi
