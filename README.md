@@ -1,4 +1,4 @@
-# CDL
+# cdl
 
 This project is a small remake in C of a bash script that i very frequently use.
 I just wanted to make this a bit more stable and easier to install and thus converted it into a C program with makefile and an install script.
@@ -28,6 +28,10 @@ For example, you have the following folder structure:
 
 in this situation if you want to navigate from `~/Documents/work/projectA/src` to your personal project, you would either have to do `cd ~/Documents/personal/cool_project` or `cd ../../../personal/cool_project`
 what this tool allows is for you to be in `~/Documents/personal/cool_project` and do `cds cool_project` and later once you want to navigate to it from anywhere, you can do `cdl cool_project` instead.
+
+## Requirements
+
+ - gcc compiler
 
 ## How to install
 
