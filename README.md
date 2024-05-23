@@ -37,7 +37,7 @@ what this tool allows is for you to be in `~/Documents/personal/cool_project` an
 
 To start the installation script just run the following command as root (for bin access)
 ```
-sudo bash <(curl -s https://github.com/meir/cdl/install.sh)
+sudo bash <(curl -s https://raw.githubusercontent.com/meir/cdl/main/install.sh)
 ```
 
 ## How to use
