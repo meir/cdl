@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  int index = -1;
   for (int i = 0; i < cache->pairs; i++) {
     if (strcmp(cache->keys[i], name) == 0) {
       printf("%s\n", cache->values[i]);

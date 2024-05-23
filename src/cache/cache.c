@@ -13,7 +13,7 @@ void init_cache_file() {
 char *get_cache_filepath() {
   const char *home = getenv("HOME");
   if (home != NULL) {
-    return strcat(strcat(strdup(home), "/"), ".cache/cdlist");
+    return strcat(strdup(home), "/.cache/cdlist");
   }
   return NULL;
 }
@@ -34,16 +34,15 @@ struct Cache *read_cache() {
 
   cache->pairs = 0;
 
-  char line[MAX_LINE_LENGTH];
-  while (fgets(line, sizeof(line), file) != NULL) {
-    char key[MAX_LINE_LENGTH];
-    char value[MAX_LINE_LENGTH];
-    if (sscanf(line, "%[^ ] %s", key, value) == 2) {
+  char key[MAX_LINE_LENGTH];
+  char value[MAX_LINE_LENGTH];
+  int scans;
+  while (scans != EOF) {
+    scans = fscanf(file, "%[^ ] %s\n", key, value);
+    if (scans == 2) {
       cache->keys[cache->pairs] = strdup(key);
       cache->values[cache->pairs] = strdup(value);
       cache->pairs++;
-    } else {
-      continue;
     }
   }
 

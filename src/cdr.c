@@ -19,10 +19,16 @@ int main(int argc, char *argv[]) {
   }
 
   int index = -1;
-  for (index = 0; index < cache->pairs; index++) {
-    if (strcmp(cache->keys[index], name) == 0) {
+  for (int i = 0; i < cache->pairs; i++) {
+    if (strcmp(cache->keys[i], name) == 0) {
+      index = i;
       break;
     }
+  }
+
+  if (index == -1) {
+    printf("No such entry in list\n");
+    return 1;
   }
 
   char cwd[1024];
