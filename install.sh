@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cmds="cdls cdp cdr cds"
 
 create_temp_dir() {
@@ -81,8 +83,8 @@ uninstall)
 	cd $temp_dir
 
 	git clone https://github.com/meir/cdl.git .
-	build
-	install
+	sudo build
+	sudo install
 
 	if [[ $installed == 1 ]]; then
 		profile=$(get_profile)
