@@ -27,7 +27,7 @@ install() {
 		mkdir -p /usr/local/bin
 		for cmd in $(ls bin/); do
 			echo "Installing $cmd..."
-			cp bin/$cmd /usr/local/bin
+			sudo cp bin/$cmd /usr/local/bin
 		done
 		export installed=1
 	fi
@@ -39,7 +39,7 @@ uninstall() {
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		for cmd in $cmds; do
 			echo "Uninstalling $cmd..."
-			rm $(which $cmd)
+			sudo rm $(which $cmd)
 		done
 	fi
 }
@@ -75,7 +75,7 @@ build)
 	build
 	;;
 uninstall)
-	sudo uninstall
+	uninstall
 	;;
 *)
 	create_temp_dir
@@ -83,8 +83,8 @@ uninstall)
 	cd $temp_dir
 
 	git clone https://github.com/meir/cdl.git .
-	sudo build
-	sudo install
+	build
+	install
 
 	if [[ $installed == 1 ]]; then
 		profile=$(get_profile)
