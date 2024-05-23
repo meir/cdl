@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 
   if (index == -1) {
     printf("No such entry in list\n");
+    free_cache(cache);
     return 1;
   }
 
