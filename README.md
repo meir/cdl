@@ -40,6 +40,8 @@ To start the installation script just run the following command as root (for bin
 bash <(curl -s https://raw.githubusercontent.com/meir/cdl/main/install.sh)
 ```
 
+To uninstall you can use the same script and add `uninstall` after it.
+
 ## How to use
 
 This project has a few commands, they're simple CRUD commands to change the cache file.
@@ -50,3 +52,8 @@ cds     | cds (name)  | save directory path on `last` or (name)
 cdls    | cdls        | list all saved name + directory paths
 cdr     | cdr (name)  | remove directory path from cache by `last` or (name)
 cdp     | cdp (name)  | print directory path saved in `last` or (name)
+
+## Troubleshooting
+
+### [1]    123456 killed     cdls
+Please uninstall and reinstall.
