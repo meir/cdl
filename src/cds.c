@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  if (i == -1) {
+  if (index == -1) {
     printf("No such entry in list\n");
     return 1;
   }
