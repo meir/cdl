@@ -75,7 +75,7 @@ build)
 	build
 	;;
 uninstall)
-	uninstall
+	sudo uninstall
 	;;
 *)
 	create_temp_dir
