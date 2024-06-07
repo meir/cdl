@@ -26,7 +26,12 @@ install() {
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		mkdir -p /usr/local/bin
 		for cmd in $(ls bin/); do
+			if [ $cmd == "" ]; then
+				continue
+			fi
+
 			echo "Installing $cmd..."
+			sudo rm $(which $cmd)
 			sudo cp bin/$cmd /usr/local/bin
 		done
 		export installed=1
