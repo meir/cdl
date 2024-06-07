@@ -53,7 +53,3 @@ cdls    | cdls        | list all saved name + directory paths
 cdr     | cdr (name)  | remove directory path from cache by `last` or (name)
 cdp     | cdp (name)  | print directory path saved in `last` or (name)
 
-## Troubleshooting
-
-### [1]    123456 killed     cdls
-Please uninstall and reinstall.
