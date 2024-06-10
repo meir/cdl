@@ -7,13 +7,20 @@ void init_cache_file() {
   if (file == NULL) {
     file = fopen(get_cache_filepath(), "w");
   }
-  fclose(file);
+  if (file != NULL) {
+    fclose(file);
+  }
 }
 
 char *get_cache_filepath() {
   const char *home = getenv("HOME");
   if (home != NULL) {
-    return strcat(strdup(home), "/.cache/cdlist");
+    char *filepath = malloc(strlen(home) + strlen("/.cache/cdlist") + 1);
+    if (filepath != NULL) {
+      strcpy(filepath, home);
+      strcat(filepath, "/.cache/cdlist");
+      return filepath;
+    }
   }
   return NULL;
 }
@@ -37,15 +44,22 @@ struct Cache *read_cache() {
   char key[MAX_LINE_LENGTH];
   char value[MAX_LINE_LENGTH];
   int scans;
-  while (scans != EOF) {
-    scans = fscanf(file, "%[^ ] %s\n", key, value);
-    if (scans == 2) {
+  while ((scans = fscanf(file, "%[^ ] %s\n", key, value)) != EOF) {
+    if (scans == 2 && cache->pairs < MAX_PATHS) {
       cache->keys[cache->pairs] = strdup(key);
       cache->values[cache->pairs] = strdup(value);
+      if (cache->keys[cache->pairs] == NULL ||
+          cache->values[cache->pairs] == NULL) {
+        // Handle allocation error
+        fclose(file);
+        free_cache(cache);
+        return NULL;
+      }
       cache->pairs++;
     }
   }
 
+  fclose(file);
   return cache;
 }
 
@@ -55,7 +69,6 @@ void write_cache(struct Cache *cache) {
   FILE *file = fopen(get_cache_filepath(), "w");
   if (file == NULL) {
     printf("Failed to open cache file\n");
-    fclose(file);
     return;
   }
 
@@ -71,4 +84,5 @@ void free_cache(struct Cache *cache) {
     free(cache->keys[i]);
     free(cache->values[i]);
   }
+  free(cache);
 }
