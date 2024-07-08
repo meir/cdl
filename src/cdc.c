@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
   for (int index = 0; index < cache->pairs; index++) {
     // Check if paths exist and delete any that do not
     struct stat st;
-    char *path = cache->values[i];
+    char *path = cache->values[index];
     if (stat(path, &st) == -1) {
       free(cache->keys[index]);
       free(cache->values[index]);
