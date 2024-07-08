@@ -8,6 +8,13 @@
   };
 
   outputs = { self, nixpkgs, flake-compat }: {
+    inputs.programs.cdl = {
+      enable = lib.mkOption {
+        default = false;
+        description = "Enable the cdl commands";
+      };
+    };
+
     packages = nixpkgs.lib.genAttrs targetSystem (system:
       let
         pkgs = pkgsFor system;

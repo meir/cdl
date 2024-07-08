@@ -52,4 +52,5 @@ cds     | cds (name)  | save directory path on `last` or (name)
 cdls    | cdls        | list all saved name + directory paths
 cdr     | cdr (name)  | remove directory path from cache by `last` or (name)
 cdp     | cdp (name)  | print directory path saved in `last` or (name)
+cdc     | cdc         | clear non existent paths from cd list
 
