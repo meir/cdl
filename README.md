@@ -42,6 +42,10 @@ bash <(curl -s https://raw.githubusercontent.com/meir/cdl/main/install.sh)
 
 To uninstall you can use the same script and add `uninstall` after it.
 
+### Nix Flakes
+
+A Nix Flake is provided that you can install, after it is installed you can add `source $(which cdl-alias)` in your bash/sh/zsh/fish profile to load in the `cdl` alias properly.
+
 ## How to use
 
 This project has a few commands, they're simple CRUD commands to change the cache file.
